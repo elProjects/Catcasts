@@ -1,0 +1,14 @@
+<%= if get_flash(@conn, :info) do %>
+  <div class="callout primary" role="alert" data-closable><%= get_flash(@conn, :info) %>
+    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% end %>
+<%= if get_flash(@conn, :error) do %>
+  <div class="callout alert" role="alert" data-closable><%= get_flash(@conn, :error) %>
+    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% end %>
