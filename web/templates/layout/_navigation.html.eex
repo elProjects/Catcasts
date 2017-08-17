@@ -10,15 +10,27 @@
   </div>
 <div class="top-bar-right">
     <ul class="menu">
-      <li>
-        <a href="#">Videos</a>
-      </li>
-      <li>
-        <a href="#">Add Video</a>
-      </li>
-      <li>
-        <a href="#">Sign in with Google</a>
-      </li>
+      <%= if @conn.assigns[:user] do %>
+        <li class="menu-text">
+          Welcome, <%= @conn.assigns.user.first_name %>!
+        </li>
+        <li>
+          <%= link "Videos", to: video_path(@conn, :index) %>
+        </li>
+        <li>
+          <%= link "Add Video", to: video_path(@conn, :new) %>
+        </li>
+        <li>
+          <%= link "Sign out", to: auth_path(@conn, :signout), class: "button alert" %>
+        </li>
+      <% else %>
+        <li>
+          <%= link "Videos", to: video_path(@conn, :index) %>
+        </li>
+        <li>
+          <%= link "Sign in with Google", to: auth_path(@conn, :request, "google", scope: "email profile"), class: "button" %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>

@@ -7,6 +7,7 @@ defmodule Catcasts.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Catcasts.Plugs.SetUser
   end
 
   pipeline :api do
@@ -16,6 +17,7 @@ defmodule Catcasts.Router do
   scope "/", Catcasts do
     pipe_through :browser # Use the default browser stack
 
+    resources "/videos", VideoController, except: [:edit, :update]
     get "/", PageController, :index
   end
 
@@ -23,6 +25,7 @@ defmodule Catcasts.Router do
   scope "/auth", Catcasts do
     pipe_through :browser
     
+    get "/signout", AuthController, :delete    
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :new
   end

@@ -25,6 +25,8 @@ defmodule Catcasts.ConnCase do
       import Ecto.Changeset
       import Ecto.Query
 
+      import Catcasts.Factory
+
       import Catcasts.Router.Helpers
 
       # The default endpoint for testing
